@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  # apigw service
+  apigw:
+    image: registry.cn-shenzhen.aliyuncs.com/go_micro/apigw:v1.0
+    container_name: apigw
+    networks:
+      - web
+    ports:
+      - "8091:8091"
+    environment:
+      - PARAMS=-p 8091 --registry etcd --registry_address etcd1:2379
+    labels:
+      - "traefik.backend=apigw"
+      - "traefik.frontend.rule=Host:apigw.guaosi.com"
+      - "traefik.docker.port=8091"
+
+networks:
+  web:
+    external:
+      name: gomicro

@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  # account service
+  account1:
+    image: registry.cn-shenzhen.aliyuncs.com/go_micro/account:v1.0
+    container_name: account1
+    networks:
+      - web
+    environment:
+      - PARAMS=--registry etcd --registry_address etcd1:2379
+
+  account2:
+    image: registry.cn-shenzhen.aliyuncs.com/go_micro/account:v1.0
+    container_name: account2
+    networks:
+      - web
+    environment:
+      - PARAMS=--registry etcd --registry_address etcd1:2379
+
+  account3:
+    image: registry.cn-shenzhen.aliyuncs.com/go_micro/account:v1.0
+    container_name: account3
+    networks:
+      - web
+    environment:
+      - PARAMS=--registry etcd --registry_address etcd1:2379
+
+networks:
+  web:
+    external:
+      name: gomicro

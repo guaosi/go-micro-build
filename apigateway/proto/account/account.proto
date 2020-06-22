@@ -1,0 +1,16 @@
+syntax="proto3";
+package proto;
+option go_package=".;proto";
+
+service AccountService{
+  rpc AccountRegister(ReqAccountRegister) returns(ResAccountRegister){}
+}
+
+message ReqAccountRegister{
+  string username=1;
+  string password=2;
+}
+message ResAccountRegister{
+  int32 code=1;
+  string message=2;
+}
