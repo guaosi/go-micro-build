@@ -1,5 +1,34 @@
 defaultEntryPoints = ["http"]
-insecureSkipVerify = true
+
+[global]
+  checkNewVersion = false
+  sendAnonymousUsage = false
+
+[log]
+  level = "WARN"
+  format = "common"
+
+[api]
+  dashboard = true
+  insecure = true
+
+[ping]
+
+[accessLog]
+
+[providers]
+  [providers.docker]
+    watch = true
+    exposedByDefault = false
+    endpoint = "unix:///var/run/docker.sock"
+    swarmMode = false
+    useBindPortIP = false
+    network = "traefik"
+  [providers.file]
+    watch = true
+    directory = "/etc/traefik/config"
+    debugLogGeneratedTemplate = true
+
 [entryPoints]
   [entryPoints.http]
   address = ":80"

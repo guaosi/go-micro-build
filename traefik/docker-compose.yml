@@ -1,9 +1,9 @@
-version: '2'
+version: '3'
 
 services:
   proxy:
-    image: traefik
-    command: --api --docker --docker.domain=docker.localhost --logLevel=DEBUG
+    image: traefik:v2.2
+    command: --api.insecure=true --providers.docker
     networks:
       - web
     ports:

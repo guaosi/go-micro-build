@@ -8,13 +8,15 @@ services:
     networks:
       - web
     ports:
-      - "8091:8091"
+      - "8081:8081"
     environment:
-      - PARAMS=-p 8091 --registry etcd --registry_address etcd1:2379
+      - PARAMS=-p 8081 --registry etcd --registry_address etcd1:2379
     labels:
-      - "traefik.backend=apigw"
-      - "traefik.frontend.rule=Host:apigw.guaosi.com"
-      - "traefik.docker.port=8091"
+      # traefik固定，与traefik设置的container_name无关
+      # apigw 是 container_name
+      - "traefik.enable=true" # 必填 否则无法加入traefik
+      - "traefik.http.routers.apigw.rule=Host(`apigw.guaosi.com`)" # 外部域名请求
+      - "traefik.http.services.apigw.loadbalancer.server.port=8081" # 转发至本容器指定port
 
 networks:
   web:
