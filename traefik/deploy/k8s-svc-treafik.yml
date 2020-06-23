@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-ingress-service
+  namespace: go-micro
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+    - protocol: TCP
+      port: 81
+      name: web
+    - protocol: TCP
+      port: 8081
+      name: admin
+  type: NodePort

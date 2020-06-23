@@ -1,0 +1,41 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: traefik-ingress-controller
+  namespace: go-micro
+  labels:
+    k8s-app: traefik-ingress-lb
+spec:
+  selector:
+    matchLabels:
+      k8s-app: traefik-ingress-lb
+  template:
+    metadata:
+      labels:
+        k8s-app: traefik-ingress-lb
+        name: traefik-ingress-lb
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      terminationGracePeriodSeconds: 50
+      hostNetwork: true
+      volumes:
+        - name: config
+          configMap:
+            name: traefik-conf
+      containers:
+        - image: traefik:v2.2
+          name: traefik-ingress-lb
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: "/opt/k8s/conf/"
+              name: "config"
+          ports:
+            - name: http
+              containerPort: 80
+            - name: admin
+              containerPort: 8080
+          args:
+            - --configFile=../traefik.toml
+            - --web
+            - --kubernetes
+            - --logLevel=DEBUG

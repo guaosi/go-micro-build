@@ -28,8 +28,8 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: micro-registry
+  name: micro-registry # 要被绑定的ClusterRole的name
 subjects:
   - kind: ServiceAccount
-    name: micro-services
+    name: micro-services # 要被绑定的serviceAccount的name
     namespace: go-micro
