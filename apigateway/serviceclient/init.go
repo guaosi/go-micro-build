@@ -5,6 +5,7 @@ import (
 	proto "apigw/proto/account"
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2"
+	_ "github.com/micro/go-plugins/registry/kubernetes/v2"
 )
 
 var Port string

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service # 网络服务
+metadata:
+  name: svc-apigw
+  namespace: go-micro # 都设置在一个命名空间下，相同网络
+  labels:
+    app: svc-apigw
+spec:
+  type: NodePort
+  ports:
+    - port: 8081 #
+      nodePort: 30088   #设置 nodeport 端口 30000-32767
+  selector:
+    app: svc-apigw

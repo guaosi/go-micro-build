@@ -4,6 +4,7 @@ import (
 	"account/handler"
 	"account/proto"
 	"github.com/micro/go-micro/v2"
+	_ "github.com/micro/go-plugins/registry/kubernetes/v2"
 	"log"
 )
 

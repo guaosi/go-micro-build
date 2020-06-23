@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment # pod部署
+metadata:
+  namespace: go-micro  # 都设置在一个命名空间下，相同网络
+  name: svc-account
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: svc-account
+  template:
+    metadata:
+      labels:
+        app: svc-account
+    spec:
+      containers:
+        - name: svc-account
+          command: [
+            "/account",
+            "--registry=kubernetes",
+          ]
+          image: registry.cn-shenzhen.aliyuncs.com/go_micro/account:v1.0
+          imagePullPolicy: Always
+      serviceAccountName: micro-services # serviceAccount的名称 用于权限
+      imagePullSecrets: # 使用指定的密钥,才能下载私钥
+        - name: regcred

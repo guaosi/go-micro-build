@@ -306,8 +306,11 @@ github.com/micro/cli/v2 v2.1.2/go.mod h1:EguNh6DAoWKm9nmk+k/Rg0H3lQnDxqzu5x5srOt
 github.com/micro/go-micro/v2 v2.8.0/go.mod h1:hSdOM6jb6aGswjBpCeB9wJ0yVH+CugevRm/CX7NlSrQ=
 github.com/micro/go-micro/v2 v2.9.0 h1:SeQ3ba02jqcl51mtkGPcZjxpIRrBXxUel8PFG4Z9QSU=
 github.com/micro/go-micro/v2 v2.9.0/go.mod h1:x55ZM3Puy0FyvvkR3e0ha0xsE9DFwfPSUMWAIbFY0SY=
+github.com/micro/go-plugins v1.5.1 h1:swcFD7ynCTUo98APqIEIbPu2XMd6yVGTnI8PqdnCwOQ=
 github.com/micro/go-plugins/registry/consul/v2 v2.8.0 h1:dvEkRUs2sWvNUUzTefGJNDlVx2sHod8HYlOMiRZs1LI=
 github.com/micro/go-plugins/registry/consul/v2 v2.8.0/go.mod h1:7ctDtZJ6Wp61uKEyUlbhMfogt5OQJOWjXCaTu3M4sQA=
+github.com/micro/go-plugins/registry/kubernetes/v2 v2.8.0 h1:Wfmp4e2/g5mKax1p9ISvReS5fSS21vgsH1XT3Th5pUE=
+github.com/micro/go-plugins/registry/kubernetes/v2 v2.8.0/go.mod h1:QffSxfttDaUYfGWDcia69SGA0I3t/vd4+0Xkqeqylfg=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
 github.com/miekg/dns v1.1.15/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
 github.com/miekg/dns v1.1.27 h1:aEH/kqUzUxGJ/UHcEKdJY+ugH6WEzsEBBSPa8zuy1aM=

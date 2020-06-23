@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service # 网络服务
+metadata:
+  name: svc-account
+  namespace: go-micro # 都设置在一个命名空间下，相同网络
+  labels:
+    app: svc-account
+spec:
+  ports:
+    - port: 8080 # 必须填写，否则报错
+      protocol: TCP
+  selector:
+    app: svc-account
