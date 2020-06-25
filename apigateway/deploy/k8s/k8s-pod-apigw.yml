@@ -26,5 +26,5 @@ spec:
             - containerPort: 8081
               name: apigw-port
       serviceAccountName: micro-services # serviceAccount的名称 用于权限
-      imagePullSecrets: # 使用指定的密钥,才能下载私有镜像
-        - name: regcred
+      #imagePullSecrets: # 使用指定的密钥,才能下载私有镜像
+      #  - name: regcred

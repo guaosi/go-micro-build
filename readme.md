@@ -1,5 +1,7 @@
 # 手摸手教你从0到1搭建部署Go微服务
 
+从`原生搭建`、`容器搭建`、`Docker-Compose搭建`、`Kubernetes搭建`这四个过程，从0到1体验基于GO的微服务搭建部署的全过程。
+
 ## 涉及
 
 |     技术      |           使用            |      版本       |
@@ -18,9 +20,13 @@
 
 ```
 - account 基于go-micro的微服务
+
 - apigateway 基于go-micro的网关,负责调用微服务
+
 - deploy 初始化部署调用,k8s搭建时使用到
+
 - etcd 服务注册使用,在原生搭建跟docker-compose搭建时使用到
+
 - traefik 反向代理
 ```
 
@@ -105,7 +111,7 @@ curl -X POST -d "username=guaosi&password=guaosi" http://127.0.0.1:8091/account/
 ```
 如果返回 `{"code":0,"message":""}` 则证明成功。
 
-## dockerfile搭建
+## 容器搭建
 
 ### etcd
 在`原生搭建`中使用的就是`etcd`的镜像创建的容器,这里可以跳过
@@ -143,7 +149,7 @@ curl -X POST -d "username=guaosi&password=guaosi" http://127.0.0.1:8091/account/
 ```
 如果返回 `{"code":0,"message":""}` 则证明成功。
 
-## docker-compose下搭建
+## Docker-Compose下搭建
 
 ### 创建专属网络
 
@@ -219,7 +225,7 @@ curl -X POST -d "username=guaosi&password=guaosi" http://apigw.guaosi.com/accoun
 ```
 如果返回 `{"code":0,"message":""}` 则证明成功。
 
-## k8s下搭建
+## Kubernetes下搭建
 
 当前kubernetes集群是kubernetes单节点,即master上进行任务调度和pod创建。
 
@@ -232,7 +238,10 @@ kubectl taint node k8s-master node-role.kubernetes.io/master=""
 ```
 
 当如果想下载自己的私有镜像时,记得需要现在kubernetes里创建secret认证,否则没有权限进行下载。
-下面以阿里云为例:
+
+**我的镜像已经开放了公有权限,可以直接下载,不需要进行验证。如果你想使用自己的镜像,请按照下面进行操作。**
+
+下面以阿里云为例
 
 ### 下载私有阿里云镜像
 
@@ -282,24 +291,24 @@ spec:
 
 创建名字为go-micro的namespace
 ```
-kubectl -f deploy/k8s/k8s-namespace.yml
+kubectl create -f deploy/k8s/k8s-namespace.yml
 ```
 
 给pod创建RBAC权限
 ```
-kubectl -f deploy/k8s/k8s-pod-rbac.yml
+kubectl create -f deploy/k8s/k8s-pod-rbac.yml
 ```
 
 ### account
 
 创建account的pod
 ```
-kubectl -f account/deploy/k8s/k8s-pod-account.yml
+kubectl create -f account/deploy/k8s/k8s-pod-account.yml
 ```
 
 创建account的services
 ```
-kubectl -f account/deploy/k8s/k8s-svc-account.yml
+kubectl create -f account/deploy/k8s/k8s-svc-account.yml
 ```
 
 > 关于`account`的负载均衡,只需要扩容`deploy`的`replicas`即可  kubectl scale --replicas=3 deployment/svc-account -n go-micro
@@ -308,12 +317,12 @@ kubectl -f account/deploy/k8s/k8s-svc-account.yml
 
 创建apigateway的pod
 ```
-kubectl -f apigateway/deploy/k8s/k8s-pod-apigw.yml
+kubectl create -f apigateway/deploy/k8s/k8s-pod-apigw.yml
 ```
 
 创建apigateway的services
 ```
-kubectl -f apigateway/deploy/k8s/k8s-svc-apigw.yml
+kubectl create -f apigateway/deploy/k8s/k8s-svc-apigw.yml
 ```
 
 此时,进行验证
@@ -332,20 +341,20 @@ curl -X POST -d "username=guaosi&password=guaosi" http://127.0.0.1:30088/account
 
 > 在`Traefik v2.0`版本后,开始使用`CRD`（Custom Resource Definition）来完成路由配置等,所以需要提前创建`CRD`资源。
 ```
-kubectl -f traefik/k8s/k8s-crd-traefik.yaml
+kubectl create -f traefik/k8s/k8s-crd-traefik.yaml
 ```
 
 #### 创建 RBAC 权限
 
 ```
-kubectl -f traefik/k8s/k8s-rbac-traefik.yml
+kubectl create -f traefik/k8s/k8s-rbac-traefik.yml
 ```
 
 #### 创建 Traefik 配置文件
 
 下面配置中可以通过配置`kubernetesCRD`与`kubernetesIngress`两项参数,让`Traefik`支持`CRD`与`Ingress`两种路由方式。
 ```
-kubectl -f traefik/k8s/k8s-config-traefik.yml
+kubectl create -f traefik/k8s/k8s-config-traefik.yml
 ```
 
 #### Kubernetes 部署 Traefik
@@ -356,10 +365,10 @@ kubectl -f traefik/k8s/k8s-config-traefik.yml
 
 ```
 # Linux系统执行
-kubectl -f traefik/k8s/k8s-pod-traefik.yml
+kubectl create -f traefik/k8s/k8s-pod-traefik.yml
 
 # Mac系统执行
-kubectl -f traefik/k8s/mac-k8s-pod-traefik.yml
+kubectl create -f traefik/k8s/mac-k8s-pod-traefik.yml
 ```
 
 ##### 注意
@@ -397,7 +406,7 @@ Traefik 应用已经部署完成,但是想让外部访问`Kubernetes`内部服�
 > 使用 CRD 方式创建路由规则可言参考 Traefik 文档 [Kubernetes IngressRoute](https://docs.traefik.io/v2.2/routing/providers/kubernetes-crd/)
 
 ```
-kubectl -f traefik/k8s/k8s-crd-router-traefik.yml
+kubectl create -f traefik/k8s/k8s-crd-router-traefik.yml
 ```
 
 #### 配置 Host 文件
@@ -411,7 +420,7 @@ kubectl -f traefik/k8s/k8s-crd-router-traefik.yml
 
 ##### 验证Traefik Dashboard
 
-打开浏览器输入地址：http://traefik.guaosi.com,即可打开`Traefik Dashboard`
+打开浏览器输入地址：http://traefik.guaosi.com  ,即可打开`Traefik Dashboard`
 
 > mac请打开 http://traefik.guaosi.com:30180 , 因为mac无法使用host模式,只能使用nodePort来映射80端口到宿主机上的30180。
 

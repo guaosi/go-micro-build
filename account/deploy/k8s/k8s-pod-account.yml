@@ -22,5 +22,5 @@ spec:
           image: registry.cn-shenzhen.aliyuncs.com/go_micro/account:v1.0
           imagePullPolicy: Always
       serviceAccountName: micro-services # serviceAccount的名称 用于权限
-      imagePullSecrets: # 使用指定的密钥,才能下载私有镜像
-        - name: regcred
+      #imagePullSecrets: # 使用指定的密钥,才能下载私有镜像
+      #  - name: regcred

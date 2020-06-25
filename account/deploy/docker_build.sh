@@ -17,8 +17,12 @@ WORK_PATH=$(pwd)
 
 mkdir bin
 
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.io,direct
+
 # 跨平台 Mac编译Linux 需要交叉编译
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${WORK_PATH}/bin/ ${WORK_PATH}/../
+# CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${WORK_PATH}/bin/ ${WORK_PATH}/../
+go build -o ${WORK_PATH}/bin/ ${WORK_PATH}/../
 
 echo -e "\033[32m编译完成: \033[0m ${WORK_PATH}/bin/"
 
