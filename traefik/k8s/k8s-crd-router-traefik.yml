@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-route
+  namespace: go-micro
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`traefik.guaosi.com`)
+      kind: Rule
+      services:
+        - name: traefik # svc的名称
+          port: 8080 # cluster 访问
+    - match: Host(`apigw.guaosi.com`)
+      kind: Rule
+      services:
+        - name: svc-apigw # svc的名称
+          port: 8081 # cluster 访问
