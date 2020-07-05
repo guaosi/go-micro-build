@@ -25,7 +25,7 @@ func RegisterService() {
 		micro.Action(func(c *cli.Context) error {
 			Port = c.String("p")
 			if len(Port) == 0 {
-				panic("parse port failed")
+				Port = "8091"
 			}
 			return nil
 		},
