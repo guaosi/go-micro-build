@@ -5,6 +5,7 @@ import (
 	proto "apigw/proto/account"
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2"
+	"github.com/micro/go-micro/v2/client"
 	// 这里使用 kubernetes 是为了之后可以通过命令行指定注册中心用 kubernetes
 	_ "github.com/micro/go-plugins/registry/kubernetes/v2"
 )
@@ -34,7 +35,7 @@ func RegisterService() {
 		),
 	)
 	// 复用服务注册的客户端
-	cli := service.Client()
+	//cli := client.DefaultClient
 	// 获取在服务注册中心上 micro.service.account 的客户端
-	handler.AccountServiceClient = proto.NewAccountService("micro.service.account", cli)
+	handler.AccountServiceClient = proto.NewAccountService("micro.service.account", client.DefaultClient)
 }
