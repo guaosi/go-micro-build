@@ -9,7 +9,7 @@
 |     语言      |          Golang           |     1.14.1      |
 | Web框架(网关) |            Gin            |     v1.6.3      |
 |   通讯格式    |         Protobuf          |     v1.4.1      |
-|  微服务框架   |         Go-micro          |     v2.8.0      |
+|  微服务框架   |         Go-micro          |     v2.9.0      |
 |   反向代理    |          Traefik          |     v2.2.1      |
 | 服务注册中心  |      Etcd/Kubernetes      | v3.3.8/v1.16.5  |
 |     容器      |          Docker           |    v19.03.8     |
