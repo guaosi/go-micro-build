@@ -1,5 +1,7 @@
 # 手摸手教你从0到1搭建部署Go微服务
 
+本仓库配合 [手摸手教你从开发到部署(CI/CD)GO微服务系列](https://www.guaosi.com/2020/07/05/go-microservice-series-from-development-to-deployment-introduction-contents/) 食用最佳噢~
+
 从`原生搭建`、`容器搭建`、`Docker-Compose搭建`、`Kubernetes搭建`这四个过程，从0到1体验基于GO的微服务搭建部署的全过程。
 
 ## 涉及
@@ -8,7 +10,7 @@
 | :-----------: | :-----------------------: | :-------------: |
 |     语言      |          Golang           |     1.14.1      |
 | Web框架(网关) |            Gin            |     v1.6.3      |
-|   通讯格式    |         Protobuf          |     v1.4.1      |
+|   通讯格式    |         Protobuf          |     v3.12.1      |
 |  微服务框架   |         Go-micro          |     v2.9.0      |
 |   反向代理    |          Traefik          |     v2.2.1      |
 | 服务注册中心  |      Etcd/Kubernetes      | v3.3.8/v1.16.5  |
