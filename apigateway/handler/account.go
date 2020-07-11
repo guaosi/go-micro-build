@@ -15,6 +15,7 @@ var (
 func RegisterHandler(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
+	// 通过AccountService服务的client，调用 AccountRegister 方法
 	res, err := AccountServiceClient.AccountRegister(context.TODO(), &proto.ReqAccountRegister{
 		Username: username,
 		Password: password,

@@ -49,7 +49,7 @@
 docker run -d \
   -p 2379:2379 \
   -p 2380:2380 \
-  --name etcd01 \
+  --name etcd1 \
   quay.io/coreos/etcd:v3.3.8 \
   /usr/local/bin/etcd \
   --name s1 \
@@ -59,6 +59,9 @@ docker run -d \
 
 如果想在etcd容器中使用cli
 ```
+# 进入容器
+docker exec -it etcd1 sh
+
 # 设置docker中环境变量
 export ETCDCTL_API=3
 
@@ -118,10 +121,10 @@ curl -X POST -d "username=guaosi&password=guaosi" http://127.0.0.1:8091/account/
 ### etcd
 在`原生搭建`中使用的就是`etcd`的镜像创建的容器,这里可以跳过
 
-获取etcd在gomicro网络里的内网IP地址
+获取etcd在网络里的内网IP地址
 
 ```
-docker inspect a180e724510a --format "{{.NetworkSettings.IPAddress}}"
+docker inspect etcd1 --format "{{.NetworkSettings.IPAddress}}"
 ```
 
 ### account
@@ -151,7 +154,7 @@ curl -X POST -d "username=guaosi&password=guaosi" http://127.0.0.1:8091/account/
 ```
 如果返回 `{"code":0,"message":""}` 则证明成功。
 
-## Docker-Compose下搭建
+## Docker Compose下搭建
 
 ### 创建专属网络
 
