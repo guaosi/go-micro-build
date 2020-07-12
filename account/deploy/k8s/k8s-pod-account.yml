@@ -4,7 +4,7 @@ metadata:
   namespace: go-micro  # 都设置在一个命名空间下，相同网络
   name: svc-account
 spec:
-  replicas: 1
+  replicas: 1 # pod 数量
   selector:
     matchLabels:
       app: svc-account

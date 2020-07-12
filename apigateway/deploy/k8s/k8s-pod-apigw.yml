@@ -4,7 +4,7 @@ metadata:
   namespace: go-micro  # 都设置在一个命名空间下，相同网络
   name: svc-apigw
 spec:
-  replicas: 1
+  replicas: 1  # pod 数量
   selector:
     matchLabels:
       app: svc-apigw
@@ -17,13 +17,13 @@ spec:
         - name: svc-apigw
           command: [
             "/apigw",
-            "--p=8081", # 只能用 = 不能用空格隔开
+            "--p=8091", # 只能用 = 不能用空格隔开
             "--registry=kubernetes",
           ]
           image: registry.cn-shenzhen.aliyuncs.com/go_micro/apigw:v1.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8081
+            - containerPort: 8091
               name: apigw-port
       serviceAccountName: micro-services # serviceAccount的名称 用于权限
       #imagePullSecrets: # 使用指定的密钥,才能下载私有镜像

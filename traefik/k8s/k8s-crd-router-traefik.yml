@@ -16,4 +16,4 @@ spec:
       kind: Rule
       services:
         - name: svc-apigw # svc的名称
-          port: 8081 # cluster 访问
+          port: 8091 # cluster 访问

@@ -8,7 +8,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8081 # cluster模式访问的端口
+    - port: 8091 # cluster模式访问的端口
       nodePort: 30088   #设置 nodeport 端口 30000-32767 此时
                       # targetPort:访问容器内部的端口,与containerPort值相同。 当没有设置targetPort时,此时targetPort的值与port相同
   selector:
