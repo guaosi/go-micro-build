@@ -8,7 +8,7 @@ import (
 
 func NewRouter() *gin.Engine {
 	route := gin.Default()
-	route.Use(middleware.SetTracer())
+	route.Use(middleware.SetTracer(), middleware.SetHystrixBreaker())
 	route.POST("/account/register", handler.RegisterHandler)
 	return route
 }
